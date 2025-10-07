@@ -1,0 +1,126 @@
+from container import ContainerInterface
+from typing import Any
+
+
+# Implement doubly linked lists
+class LinkedListNode:
+    obj: Any = None
+
+    next_node: "LinkedListNode | None" = None
+    prev_node: "LinkedListNode | None" = None
+
+    def __init__(self, element: Any):
+        self.obj = element
+
+    def remove(self) -> None:
+        # Patch
+        if self.prev_node:
+            self.prev_node.next_node = self.next_node
+        if self.next_node:
+            self.next_node.prev_node = self.prev_node
+        self.obj = None
+
+    def add_after(self, element: Any) -> None:
+        n = LinkedListNode(element)
+        n.prev_node = self
+        n.next_node = self.next_node
+        self.next_node = n
+
+    def add_before(self, element: Any) -> None:
+        n = LinkedListNode(element)
+        n.prev_node = self.prev_node
+        n.next_node = self
+        self.prev_node = n
+
+
+class LinkedList(ContainerInterface):
+    node: LinkedListNode | None = None
+
+    def __init__(self):
+        pass
+
+    def __getitem__(self, idx: int) -> Any | None:
+        n = self.nth_node(idx)
+        if n:
+            return n.obj
+        return self
+
+    def first_element(self) -> Any | None:
+        if self.node:
+            return self.node.obj
+        return None
+
+    def first_node(self) -> LinkedListNode | None:
+        return self.node
+
+    def last_node(self) -> LinkedListNode | None:
+        node = self.node
+        while node and node.next_node:
+            node = node.next_node
+        return node
+
+    def nth_node(self, idx: int) -> LinkedListNode | None:
+        node = self.node
+        if not node:
+            return None
+
+        for _i in range(0, idx):
+            if node:
+                node = node.next_node
+
+        return node
+
+    def remove(self, idx: int) -> Any | None:
+        n = self.nth_node(idx)
+        if n:
+            obj = n.obj
+            n.remove()
+            return obj
+        return None
+
+    def insert(self, value: Any, idx: int) -> bool:
+        n = self.nth_node(idx - 1)
+        if n:
+            n.add_after(value)
+            return True
+        return False
+
+    def push_front(self, element: Any) -> None:
+        if not self.node:
+            self.node = LinkedListNode(element)
+            return
+
+        self.node.add_before(element)
+        self.node = self.node.prev_node
+
+    def push_back(self, element: Any):
+        if not self.node:
+            self.node = LinkedListNode(element)
+            return
+
+        n = self.last_node()
+        assert n, "?"
+        n.add_after(element)
+
+    def pop_front(self) -> Any | None:
+        if not self.node:
+            return None
+
+        # Store element, since we're going to delete the source node
+        element = self.node.obj
+
+        # Delete the source node, and store the one after.
+        to_remove = self.node
+        self.node = to_remove.next_node
+        to_remove.remove()
+
+        return element
+
+    def pop_back(self) -> Any | None:
+        last = self.last_node()
+        if not last:
+            return None
+
+        element = last.obj
+        last.remove()
+        return element
