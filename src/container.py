@@ -2,7 +2,7 @@ from typing import Any, Callable, Iterator
 
 
 class ContainerInterface:
-    # IMPLEMENT THESE #
+    # IMPLEMENT THESE IN YOUR CONTAINER #
     def __iter__(self) -> Iterator[Any]:
         assert False, "Todo"
 
