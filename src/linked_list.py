@@ -20,17 +20,27 @@ class LinkedListNode:
             self.next_node.prev_node = self.prev_node
         self.obj = None
 
-    def add_after(self, element: Any) -> None:
+    def add_after(self, element: Any) -> "LinkedListNode":
         n = LinkedListNode(element)
+
         n.prev_node = self
         n.next_node = self.next_node
+
+        if self.next_node:
+            self.next_node.prev_node = n
         self.next_node = n
 
-    def add_before(self, element: Any) -> None:
+        return n
+
+    def add_before(self, element: Any) -> "LinkedListNode":
         n = LinkedListNode(element)
         n.prev_node = self.prev_node
         n.next_node = self
+
+        if self.prev_node:
+            self.prev_node.next_node = n
         self.prev_node = n
+        return n
 
 
 class LinkedList(ContainerInterface):
@@ -90,8 +100,7 @@ class LinkedList(ContainerInterface):
             self.node = LinkedListNode(element)
             return
 
-        self.node.add_before(element)
-        self.node = self.node.prev_node
+        self.node = self.node.add_before(element)
 
     def push_back(self, element: Any):
         if not self.node:
