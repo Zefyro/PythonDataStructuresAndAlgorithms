@@ -14,6 +14,7 @@ def test_push_pop_size():
     assert queue.pop() == "hello"
     assert queue.pop() == "world"
     assert queue.size() == 0
+    assert queue.pop() == None
 
 
 def test_peek_is_empty():

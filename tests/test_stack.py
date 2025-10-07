@@ -14,6 +14,7 @@ def test_push_pop_size():
     assert stack.pop() == "world"
     assert stack.pop() == "hello"
     assert stack.size() == 0
+    assert stack.pop() == None
 
 
 def test_peek_is_empty():
