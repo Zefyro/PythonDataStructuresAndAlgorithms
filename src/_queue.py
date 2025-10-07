@@ -18,6 +18,9 @@ class Queue(ContainerInterface):
         else:
             return self.items[idx]
     
+    def __len__(self) -> int:
+        return self.size()
+    
     def is_empty(self) -> bool:
         """
         Returns: True if the queue is empty, false otherwise.

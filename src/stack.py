@@ -17,6 +17,9 @@ class Stack(ContainerInterface):
             return None
         else:
             return self.items[idx]
+    
+    def __len__(self) -> int:
+        return self.size()
 
     def is_empty(self) -> bool:
         """
