@@ -2,6 +2,12 @@ from typing import Any, Callable, Iterator
 
 
 class ContainerInterface:
+    """
+    ### ContainerInterface
+    - Used internally to unify some APIs between all the containers.
+    - Allows us to implement algorithms in one place, and so that they work with all the containers
+    """
+
     # IMPLEMENT THESE IN YOUR CONTAINER #
     def __iter__(self) -> Iterator[Any]:
         assert False, "Todo"

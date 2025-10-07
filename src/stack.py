@@ -3,8 +3,8 @@ from .container import ContainerInterface
 
 class Stack(ContainerInterface):
     """
-    An implementation of a stack.  
-    A stack follows a "last-in, first-out" (LIFO) principle.
+    ### An implementation of a stack.  
+    - A stack follows a "last-in, first-out" (LIFO) principle.
     """
     def __init__(self) -> None:
         self.items: list[Any] = []

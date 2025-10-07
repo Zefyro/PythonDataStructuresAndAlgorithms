@@ -3,8 +3,8 @@ from .container import ContainerInterface
 
 class Deque(ContainerInterface):
     """
-    An implementation of a deque.  
-    A deque allows adding and removing elements from both the front and back.
+    ### An implementation of a deque.  
+    - A deque allows adding and removing elements from both the front and back.
     """
     def __init__(self) -> None:
         self.items: list[Any] = []
