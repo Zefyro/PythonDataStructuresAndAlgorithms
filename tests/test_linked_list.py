@@ -48,6 +48,16 @@ def test_linked_list_node_patching():
     assert n4.prev_node == n3
 
 
+def test_linked_list_iterator():
+    r = range(0, 50)
+    list = LinkedList()
+    for i in r:
+        list.push_back(i)
+
+    for i, l in zip(list, r):
+        assert i == l
+
+
 def test_linked_list_push_front_pop_back():
     r = range(0, 50)
     list = LinkedList()
@@ -81,15 +91,19 @@ def test_linked_list_remove_idx():
     # Too far
     removed = list.remove(100)
     assert removed == None
+    assert list.length() == 100
 
     removed = list.remove(10)
     assert removed == 10
+    assert list.length() == 99
 
     removed = list.remove(10)
     assert removed == 11
+    assert list.length() == 98
 
     removed = list.remove(97)
     assert removed == 99
+    assert list.length() == 97
 
 
 def test_linked_list_index_into():

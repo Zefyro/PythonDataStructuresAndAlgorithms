@@ -46,8 +46,11 @@ class LinkedListNode:
 class LinkedList(ContainerInterface):
     node: LinkedListNode | None = None
 
-    def __init__(self):
-        pass
+    def __iter__(self):
+        node = self.node
+        while node:
+            yield node.obj
+            node = node.next_node
 
     def __getitem__(self, idx: int) -> Any | None:
         n = self.nth_node(idx)
@@ -65,6 +68,14 @@ class LinkedList(ContainerInterface):
         if n:
             return n.obj
         return None
+
+    def length(self) -> int:
+        node = self.node
+        num: int = 1 if self.node else 0
+        while node and node.next_node:
+            node = node.next_node
+            num += 1
+        return num
 
     def first_node(self) -> LinkedListNode | None:
         return self.node
