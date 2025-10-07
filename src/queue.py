@@ -3,9 +3,10 @@ from .container import ContainerInterface
 
 class Queue(ContainerInterface):
     """
-    An implementation of a queue.  
-    A queue follows a "first-in, first-out" (FIFO) principle.
+    ### An implementation of a queue.  
+    - A queue follows a "first-in, first-out" (FIFO) principle.
     """
+    
     def __init__(self) -> None:
         self.items: list[Any] = []
     

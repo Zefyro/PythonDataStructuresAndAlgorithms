@@ -1,4 +1,4 @@
-from src._queue import Queue
+from src.queue import Queue
 
 def test_push_pop_size():
     queue = Queue()
