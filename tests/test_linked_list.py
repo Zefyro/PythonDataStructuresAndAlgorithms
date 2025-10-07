@@ -90,3 +90,17 @@ def test_linked_list_remove_idx():
 
     removed = list.remove(97)
     assert removed == 99
+
+
+def test_linked_list_index_into():
+    r = range(0, 100)
+    list = LinkedList()
+    for i in r:
+        list.push_back(i)
+
+    # Over & Under
+    assert list[100] == None
+    assert list[-1] == None
+
+    for i in r:
+        assert list[i] == i

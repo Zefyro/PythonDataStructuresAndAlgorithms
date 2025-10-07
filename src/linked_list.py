@@ -53,11 +53,17 @@ class LinkedList(ContainerInterface):
         n = self.nth_node(idx)
         if n:
             return n.obj
-        return self
+        return None
 
-    def first_element(self) -> Any | None:
+    def first(self) -> Any | None:
         if self.node:
             return self.node.obj
+        return None
+
+    def last(self) -> Any | None:
+        n = self.last_node()
+        if n:
+            return n.obj
         return None
 
     def first_node(self) -> LinkedListNode | None:
@@ -70,6 +76,9 @@ class LinkedList(ContainerInterface):
         return node
 
     def nth_node(self, idx: int) -> LinkedListNode | None:
+        if idx < 0:
+            return None
+
         node = self.node
         if not node:
             return None
