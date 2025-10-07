@@ -91,19 +91,19 @@ def test_linked_list_remove_idx():
     # Too far
     removed = list.remove(100)
     assert removed == None
-    assert list.length() == 100
+    assert len(list) == 100
 
     removed = list.remove(10)
     assert removed == 10
-    assert list.length() == 99
+    assert len(list) == 99
 
     removed = list.remove(10)
     assert removed == 11
-    assert list.length() == 98
+    assert len(list) == 98
 
     removed = list.remove(97)
     assert removed == 99
-    assert list.length() == 97
+    assert len(list) == 97
 
 
 def test_linked_list_index_into():

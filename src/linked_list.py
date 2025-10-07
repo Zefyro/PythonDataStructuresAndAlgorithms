@@ -69,7 +69,7 @@ class LinkedList(ContainerInterface):
             return n.obj
         return None
 
-    def length(self) -> int:
+    def __len__(self) -> int:
         node = self.node
         num: int = 1 if self.node else 0
         while node and node.next_node:
