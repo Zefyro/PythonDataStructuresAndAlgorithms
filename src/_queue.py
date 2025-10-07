@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Iterator
 from .container import ContainerInterface
 
 class Queue(ContainerInterface):
@@ -8,6 +8,15 @@ class Queue(ContainerInterface):
     """
     def __init__(self) -> None:
         self.items: list[Any] = []
+    
+    def __iter__(self) -> Iterator[Any]:
+        return iter(self.items)
+    
+    def __getitem__(self, idx: int) -> Any:
+        if idx >= self.size() or idx < 0:
+            return None
+        else:
+            return self.items[idx]
     
     def is_empty(self) -> bool:
         """
