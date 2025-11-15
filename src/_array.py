@@ -17,9 +17,12 @@ class Array(ContainerInterface):
     def __iter__(self) -> Iterator[Any]:
         return iter(self.items)
 
-    def __getitem__(self, idx: int) -> Any:
-        if idx >= len(self.items) or idx < 0:
-            raise IndexError("Index out of range")
+    def __getitem__(self, idx: int | slice) -> Any:
+        if isinstance(idx, int):
+            if idx >= len(self.items) or idx < 0:
+                raise IndexError("Index out of range")
+            else:
+                return self.items[idx]
         else:
             return self.items[idx]
 

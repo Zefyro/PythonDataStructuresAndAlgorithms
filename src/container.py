@@ -16,7 +16,7 @@ class ContainerInterface:
     def __len__(self) -> int:
         raise Exception("UNIMPLEMENTED IN YOUR CONTAINER")
 
-    def __getitem__(self, idx: int) -> Any:
+    def __getitem__(self, idx: int | slice) -> Any:
         raise Exception("UNIMPLEMENTED IN YOUR CONTAINER")
 
     def __setitem__(self, idx: int, value: Any) -> Any:
@@ -25,6 +25,38 @@ class ContainerInterface:
     ######################
     # SORTING ALGORITHMS #
     ######################
+    # def merge_sort(self):
+    #    if len(self) < 2:
+    #        return
+
+    #    mid = len(self) // 2
+    #    left_half = self[:mid]
+    #    right_half = self[mid:]
+
+    #    merge_sort(left_half)
+    #    merge_sort(right_half)
+
+    #    i = j = k = 0
+
+    #    while i < len(left_half) and j < len(right_half):
+    #        if left_half[i] < right_half[j]:
+    #            my_list[k] = left_half[i]
+    #            i += 1
+    #        else:
+    #            my_list[k] = right_half[j]
+    #            j += 1
+    #        k += 1
+
+    #    while i < len(left_half):
+    #        my_list[k] = left_half[i]
+    #        i += 1
+    #        k += 1
+
+    #    while j < len(right_half):
+    #        my_list[k] = right_half[j]
+    #        j += 1
+    #        k += 1
+
     def insertion_sort(self, compare: Callable[[Any, Any], int] | None = None):
         """
         Sorts a given array, optionally using a user-provided compare function.
