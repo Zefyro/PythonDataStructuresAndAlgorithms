@@ -1,5 +1,17 @@
 import pytest
+
 from src.deque import Deque
+
+
+def test_array_slicing():
+    deq = Deque()
+    for i in range(5):
+        deq.push_back(i)
+
+    assert deq[:-1] == [0, 1, 2, 3]
+    assert deq[:-2] == [0, 1, 2]
+    assert deq[2:-2] == [2]
+
 
 def test_push_front_pop_front_size():
     deque = Deque()
@@ -14,6 +26,7 @@ def test_push_front_pop_front_size():
     assert deque.size() == 0
     assert deque.pop_front() == None
 
+
 def test_push_back_pop_back_size():
     deque = Deque()
     assert deque.size() == 0
@@ -27,6 +40,7 @@ def test_push_back_pop_back_size():
     assert deque.size() == 0
     assert deque.pop_back() == None
 
+
 def test_peek_front_is_empty():
     deque = Deque()
     assert deque.is_empty()
@@ -37,6 +51,7 @@ def test_peek_front_is_empty():
     deque.push_front("another")
     assert deque.peek_front() == "another"
 
+
 def test_peek_back_is_empty():
     deque = Deque()
     assert deque.is_empty()
@@ -46,6 +61,7 @@ def test_peek_back_is_empty():
     assert not deque.is_empty()
     deque.push_back("another")
     assert deque.peek_back() == "another"
+
 
 def test_mixed_operations():
     deque = Deque()
@@ -61,6 +77,7 @@ def test_mixed_operations():
     assert deque.pop_back() == 2
     assert deque.size() == 0
 
+
 def test_getitem():
     deque = Deque()
     deque.push_back(1)
@@ -70,8 +87,12 @@ def test_getitem():
     assert deque[0] == 1
     assert deque[1] == 2
     assert deque[2] == 3
-    assert deque[-1] == None
-    assert deque[3] == None
+
+    with pytest.raises(IndexError):
+        deque[-1] = None
+    with pytest.raises(IndexError):
+        deque[3] = None
+
 
 def test_setitem():
     deque = Deque()
@@ -88,8 +109,11 @@ def test_setitem():
     assert deque[0] == 0
     assert deque[1] == 0
     assert deque[2] == 0
-    assert deque[-1] == None
-    assert deque[3] == None
+    with pytest.raises(IndexError):
+        deque[-1] = None
+    with pytest.raises(IndexError):
+        deque[3] = None
+
 
 def test_iter():
     deque = Deque()
@@ -99,6 +123,7 @@ def test_iter():
 
     for i, item in enumerate(deque):
         assert item == items[i]
+
 
 def test_datatypes():
     deque = Deque()
@@ -114,12 +139,14 @@ def test_datatypes():
     assert deque.pop_back() == 2.5
     assert deque.pop_front() == 1
 
+
 def test_pop_on_empty_deque():
     deque = Deque()
     assert deque.pop_front() is None
     assert deque.pop_back() is None
     assert deque.pop_front() is None
     assert deque.pop_back() is None
+
 
 def test_peek_on_empty_deque():
     deque = Deque()
@@ -128,18 +155,19 @@ def test_peek_on_empty_deque():
     assert deque.peek_front() is None
     assert deque.peek_back() is None
 
+
 def test_large_deque():
     deque = Deque()
     for i in range(1000):
         deque.push_back(i)
-    
+
     assert deque.size() == 1000
 
     for i in range(500):
         assert deque.pop_front() == i
-    
+
     for i in range(999, 499, -1):
         assert deque.pop_back() == i
-    
+
     assert deque.size() == 0
     assert deque.is_empty()
