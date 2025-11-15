@@ -122,6 +122,8 @@ class LinkedList(ContainerInterface):
         n = self.nth_node(idx)
         if n:
             obj = n.obj
+            if self.node == n:
+                self.node = n.next_node
             n.remove()
             return obj
         return None
