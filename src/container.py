@@ -18,9 +18,28 @@ class ContainerInterface:
     def __getitem__(self, idx: int) -> Any:
         raise Exception("UNIMPLEMENTED IN YOUR CONTAINER")
 
-    # Base container algorithms
+    def __setitem__(self, idx: int, value: Any) -> Any:
+        raise Exception("UNIMPLEMENTED IN YOUR CONTAINER")
+
+    ######################
+    # SORTING ALGORITHMS #
+    ######################
+
+    # Sort using a custom sorting function.
+    #
     def sort(self, compare: Callable[[Any, Any], int] | None = None):
-        assert False, "Todo"
+        self.bubble_sort(compare)
+
+    def bubble_sort(self, compare: Callable[[Any, Any], int] | None = None):
+        if not compare:
+            compare = ContainerInterface._default_compare
+
+        n = len(self)
+        for i in range(n - 1):
+            for j in range(n - i - 1):
+                if not compare(self[j], self[j + 1]):
+                    continue
+                self[j], self[j + 1] = self[j + 1], self[j]
 
     def find(self, to_find: Any) -> Any | None:
         for obj in self:
@@ -38,8 +57,8 @@ class ContainerInterface:
         assert False, "Todo"
 
     def is_sorted(self, compare: Callable[[Any, Any], int] | None = None) -> bool:
-        if compare == None:
-            compare = lambda ob1, ob2: ob1 - ob2
+        if not compare:
+            compare = ContainerInterface._default_compare
 
         for i in range(1, len(self)):
             score = compare(self[i - 1], self[i])
@@ -57,3 +76,6 @@ class ContainerInterface:
             out_str += f" {i},"
         out_str = out_str[:-1]  # delete ','
         return out_str + " ]"
+
+    def _default_compare(a: Any, b: Any) -> int:
+        return a > b
