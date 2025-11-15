@@ -1,9 +1,75 @@
 import random
+from typing import Any
 
+from src._array import Array
 from src.container import ContainerInterface
 from src.deque import Deque
 from src.linked_list import LinkedList
 from src.stack import Stack
+
+
+def test_container_str():
+    list = LinkedList()
+    assert str(list) == "[ ]"
+    list.push_back(1)
+    list.push_back(2)
+    list.push_back(3)
+    assert str(list) == "[ 1, 2, 3 ]"
+
+    stack = Stack()
+    assert str(stack) == "[ ]"
+    stack.push(3)
+    stack.push(2)
+    stack.push(1)
+    assert str(stack) == "[ 3, 2, 1 ]"
+
+    deque = Deque()
+    assert str(deque) == "[ ]"
+    deque.push_front(1)
+    deque.push_front(2)
+    deque.push_front(3)
+    assert str(deque) == "[ 3, 2, 1 ]"
+
+
+def test_container_find_default():
+    arr = Array(100)
+    for i in range(100):
+        arr[i] = i
+
+    assert arr.is_sorted()
+    assert arr.find(50) == 50
+    assert arr.find(1) == 1
+    assert arr.find(99) == 99
+    assert arr.find(111) == -1
+
+    assert arr.find_binary(0) == 0
+    assert arr.find_binary(13) == 13
+    assert arr.find_binary(78) == 78
+    assert arr.find_binary(111) == -1
+    assert arr.find_binary(-500) == -1
+
+
+def test_container_callable_finding():
+    arr = Array(100)
+    for i, j in enumerate(reversed(range(100))):
+        arr[i] = j
+
+    # This ordering function is for going from bigger to lower.
+    def ordering_function(x: Any, y: Any):
+        return x < y
+
+    assert arr.is_sorted(ordering_function)
+
+    assert arr.find_binary(0, ordering_function) == 99
+    assert arr.find_binary(13, ordering_function) == 86
+    assert arr.find_binary(78, ordering_function) == 21
+    assert arr.find_binary(111, ordering_function) == -1
+    assert arr.find_binary(-500, ordering_function) == -1
+
+    # Use callable to find the element '21'
+    assert arr.find_callable(lambda x: x == 21) == 78
+    assert arr.find_callable(lambda x: x == 101) == -1
+    assert arr.find_callable(lambda x: x == -1) == -1
 
 
 def test_container_iteration_n_is_sorted():

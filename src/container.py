@@ -61,22 +61,58 @@ class ContainerInterface:
             j = random.randint(0, n - i - 1)
             self[j], self[i] = self[i], self[j]
 
-    def find(self, to_find: Any) -> Any | None:
-        for obj in self:
+    def find(self, to_find: Any) -> int:
+        """
+        Linearly searches the container for an object. If found, index is returned.
+        If not found, `-1` is returned
+        """
+        for i, obj in enumerate(self):
             if obj == to_find:
-                return obj
-        return None
+                return i
+        return -1
 
-    def find_callable(self, find_fn: Callable[[Any], bool]) -> Any | None:
-        for obj in self:
+    def find_callable(self, find_fn: Callable[[Any], bool]) -> int:
+        """
+        Linearly iterates over the container, calling the find_fn on each element.
+        When find_fn returns `true` the iteration is stopped and the index is returned.
+        If not matches were found `-1` is returned.
+        """
+        for i, obj in enumerate(self):
             if find_fn(obj):
-                return obj
-        return None
+                return i
+        return -1
 
-    def find_binary(self, to_find: Any) -> Any | None:
-        assert False, "Todo"
+    def find_binary(
+        self, to_find: Any, compare: Callable[[Any, Any], int] | None = None
+    ) -> int:
+        """
+        Binary search an object, optionally passing a compare function.
+        The container has to be sorted for binary search to work!
+        If the object is found, then it's index is returned, otherwise `-1` is returned.
+        """
+
+        if not compare:
+            compare = ContainerInterface._default_compare
+
+        left_hand_side = 0
+        right_hand_side = len(self) - 1
+
+        while left_hand_side <= right_hand_side:
+            # Middle index
+            pivot = (left_hand_side + right_hand_side) // 2
+            if self[pivot] == to_find:
+                return pivot
+            if compare(self[pivot], to_find):
+                right_hand_side = pivot - 1
+            else:
+                left_hand_side = pivot + 1
+
+        return -1
 
     def is_sorted(self, compare: Callable[[Any, Any], int] | None = None) -> bool:
+        """
+        Returns true if container is sorted, optionally compared with the compare function.
+        """
         if not compare:
             compare = ContainerInterface._default_compare
 
@@ -98,4 +134,7 @@ class ContainerInterface:
         return out_str + " ]"
 
     def _default_compare(a: Any, b: Any) -> int:
+        """
+        Default compare functions used for sorting and searching.
+        """
         return a > b
