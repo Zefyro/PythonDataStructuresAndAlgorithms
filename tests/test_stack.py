@@ -1,3 +1,4 @@
+import pytest
 from src.stack import Stack
 
 def test_push_pop_size():
@@ -21,6 +22,24 @@ def test_peek_is_empty():
     assert not stack.is_empty()
     assert stack.peek() == "test"
     assert stack.size() == 1
+
+def test_setitem():
+    stack: Stack = Stack()
+    stack.push(1)
+    stack.push(2)
+    stack.push(3)
+    stack[0] = 0
+    stack[1] = 0
+    stack[2] = 0
+    
+    with pytest.raises(IndexError):
+        stack[3] = 0
+    
+    assert stack[0] == 0
+    assert stack[1] == 0
+    assert stack[2] == 0
+    assert stack[-1] == None
+    assert stack[3] == None
 
 def test_getitem():
     stack: Stack = Stack()
