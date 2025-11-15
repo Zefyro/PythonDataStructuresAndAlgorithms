@@ -3,7 +3,7 @@
 
 #### Sorting
 - [ ] Bogo sort
-- [ ] Bubble Sort
+- [x] Bubble Sort
 - [ ] Insertion Sort
 - [ ] Merge Sort
 
