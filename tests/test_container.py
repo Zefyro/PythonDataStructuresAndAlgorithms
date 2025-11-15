@@ -1,6 +1,8 @@
 import random
 from typing import Any
 
+import pytest
+
 from src._array import Array
 from src.container import ContainerInterface
 from src.deque import Deque
@@ -29,6 +31,19 @@ def test_container_str():
     deque.push_front(2)
     deque.push_front(3)
     assert str(deque) == "[ 3, 2, 1 ]"
+
+
+def test_container_unimplemented():
+    interface = ContainerInterface()
+    with pytest.raises(Exception):
+        x = interface[0]
+    with pytest.raises(Exception):
+        interface[0] = 0
+    with pytest.raises(Exception):
+        for i in interface:
+            print(i)
+    with pytest.raises(Exception):
+        n = len(interface)
 
 
 def test_container_find_default():
