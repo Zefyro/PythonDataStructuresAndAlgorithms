@@ -12,9 +12,9 @@
 - [ ] Binary Search
 
 #### Traversal
-- [ ] In-order traversal
-- [ ] Pre-order traversal
-- [ ] Post-order traversal
+- [x] In-order traversal
+- [x] Pre-order traversal
+- [x] Post-order traversal
 
 ### Data Structures
 - [x] Array
@@ -22,8 +22,8 @@
 - [x] Queue
 - [x] Linked List
 - [x] Stack
-- [ ] Binary Tree
-- [ ] Binary Search Tree
+- [x] Binary Tree
+- [x] Binary Search Tree
 - [ ] Balance Tree
 - [ ] HashTable
 - [ ] HashMap
