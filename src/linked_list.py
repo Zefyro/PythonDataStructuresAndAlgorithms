@@ -20,6 +20,9 @@ class LinkedListNode:
     def __init__(self, element: Any):
         self.obj = element
 
+    def __str__(self) -> str:
+        return f"{self.obj}"
+
     def remove(self) -> None:
         # Patch
         if self.prev_node:
@@ -123,7 +126,7 @@ class LinkedList(ContainerInterface):
             return obj
         return None
 
-    def insert(self, value: Any, idx: int) -> bool:
+    def insert(self, idx: int, value: Any) -> bool:
         """
         Inserts a node, so that it will be available at `idx`.
         Returns success, may fail if there is no node at `idx-1`.

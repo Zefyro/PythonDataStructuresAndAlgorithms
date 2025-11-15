@@ -1,8 +1,50 @@
+import pytest
+
 from linked_list import LinkedList, LinkedListNode
+
+
+def test_linked_node_str():
+    assert str(LinkedListNode(0)) == "0"
+    assert str(LinkedListNode("Hello World")) == "Hello World"
+    assert str(LinkedListNode({"obj": "x"})) == "{'obj': 'x'}"
 
 
 def test_linked_list_set_n_get():
     list = LinkedList()
+    assert list.nth_node(0) == None
+
+    list.push_back(1)
+    list.push_back(2)
+    list.push_back(3)
+
+    assert list[0] == 1
+    assert list[1] == 2
+    assert list[2] == 3
+    assert list.nth_node(0).obj == 1
+    assert list.nth_node(1).obj == 2
+    assert list.nth_node(2).obj == 3
+
+    list[0] = "Hello"
+    list[1] = "Sailor"
+    list[2] = "!"
+    assert list[0] == "Hello"
+    assert list[1] == "Sailor"
+    assert list[2] == "!"
+
+    with pytest.raises(IndexError):
+        list[-1] = 0
+    with pytest.raises(IndexError):
+        list[3] = 0
+    assert list.nth_node(3) == None
+
+
+def test_linked_list_insert():
+    list = LinkedList()
+
+    # If there is no elements, don't insert.
+    list.insert(0, 10)
+    assert list[0] == None
+
     list.push_back(1)
     list.push_back(2)
     list.push_back(3)
@@ -11,12 +53,15 @@ def test_linked_list_set_n_get():
     assert list[1] == 2
     assert list[2] == 3
 
-    list[0] = "Hello"
-    list[1] = "Sailor"
-    list[2] = "!"
-    assert list[0] == "Hello"
-    assert list[1] == "Sailor"
-    assert list[2] == "!"
+    list.insert(1, 69)
+    assert list[0] == 1
+    assert list[1] == 69
+    assert list[2] == 2
+    assert list[3] == 3
+
+    # Past the insert point
+    list.insert(100, 10)
+    assert list[100] == None
 
 
 def test_linked_list_node_patching():
@@ -79,8 +124,12 @@ def test_linked_list_iterator():
 def test_linked_list_push_front_pop_back():
     r = range(0, 50)
     list = LinkedList()
+    assert list.first() == None
+    assert list.last() == None
     for i in r:
         list.push_front(i)
+    assert list.last() == 0
+    assert list.first() == 49
 
     for i in r:
         assert list.pop_back() == i
