@@ -118,9 +118,10 @@ class LinkedList(ContainerInterface):
         Removes the node at `idx`, if available.
         Returns the removed element, or None.
         """
-
         n = self.nth_node(idx)
         if n:
+            if idx == 0:
+                self.node = n.next_node
             obj = n.obj
             if self.node == n:
                 self.node = n.next_node
