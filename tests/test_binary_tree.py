@@ -55,3 +55,11 @@ def test_empty_tree():
     assert tree.inorder_traversal() == []
     assert tree.preorder_traversal() == []
     assert tree.postorder_traversal() == []
+
+
+def test_recursive_insert():
+    tree = BinaryTree()
+    tree.insert(5)
+    tree.insert(4)
+    tree.insert(6)
+    tree.insert(6)

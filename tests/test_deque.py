@@ -1,3 +1,4 @@
+import pytest
 from src.deque import Deque
 
 def test_push_front_pop_front_size():
@@ -69,6 +70,24 @@ def test_getitem():
     assert deque[0] == 1
     assert deque[1] == 2
     assert deque[2] == 3
+    assert deque[-1] == None
+    assert deque[3] == None
+
+def test_setitem():
+    deque = Deque()
+    deque.push_back(1)
+    deque.push_back(2)
+    deque.push_back(3)
+    deque[0] = 0
+    deque[1] = 0
+    deque[2] = 0
+
+    with pytest.raises(IndexError):
+        deque[3] = 0
+
+    assert deque[0] == 0
+    assert deque[1] == 0
+    assert deque[2] == 0
     assert deque[-1] == None
     assert deque[3] == None
 
