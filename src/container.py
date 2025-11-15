@@ -47,3 +47,13 @@ class ContainerInterface:
                 return False
 
         return True
+
+    def __str__(self) -> str:
+        if len(self) == 0:
+            return "[ ]"
+
+        out_str = "["
+        for i in self:
+            out_str += f" {i},"
+        out_str = out_str[:-1]  # delete ','
+        return out_str + " ]"
