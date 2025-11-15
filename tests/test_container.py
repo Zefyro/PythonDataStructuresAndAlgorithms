@@ -33,21 +33,42 @@ def test_container_iteration_n_is_sorted():
 def test_container_bubble_sort():
     r = range(0, 100)
 
-    def container_iterate(container: ContainerInterface):
-        container.bubble_sort()
-        assert container.is_sorted()
-
     list = LinkedList()
     for _ in r:
         list.push_back(random.random())
-    container_iterate(list)
+    list.bubble_sort()
+    assert list.is_sorted()
 
     deque = Deque()
     for _ in r:
         deque.push_back(random.random())
-    container_iterate(deque)
+    deque.bubble_sort()
+    assert deque.is_sorted()
 
     stack = Stack()
     for _ in r:
         stack.push(random.random())
-    container_iterate(stack)
+    stack.bubble_sort()
+    assert stack.is_sorted()
+
+
+def test_container_bogo_sort():
+    r = range(0, 4)
+
+    list = LinkedList()
+    for _ in r:
+        list.push_back(random.random())
+    list.bogo_sort()
+    assert list.is_sorted()
+
+    deque = Deque()
+    for _ in r:
+        deque.push_back(random.random())
+    deque.bogo_sort()
+    assert deque.is_sorted()
+
+    stack = Stack()
+    for _ in r:
+        stack.push(random.random())
+    stack.bogo_sort()
+    assert stack.is_sorted()

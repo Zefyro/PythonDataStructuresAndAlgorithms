@@ -2,7 +2,7 @@
 ### Algorithms
 
 #### Sorting
-- [ ] Bogo sort
+- [x] Bogo sort
 - [x] Bubble Sort
 - [ ] Insertion Sort
 - [ ] Merge Sort

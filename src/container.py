@@ -1,3 +1,4 @@
+import random
 from typing import Any, Callable, Iterator
 
 
@@ -40,6 +41,25 @@ class ContainerInterface:
                 if not compare(self[j], self[j + 1]):
                     continue
                 self[j], self[j + 1] = self[j + 1], self[j]
+
+    def bogo_sort(self, compare: Callable[[Any, Any], int] | None = None):
+        if not compare:
+            compare = ContainerInterface._default_compare
+
+        # Not sorted? Shuffle:
+        while not self.is_sorted(compare):
+            self.shuffle()
+
+    def shuffle(self):
+        """
+        Shuffles the contents of the array, in to a random order.
+        Based on the: Fisher–Yates shuffle
+        """
+
+        n = len(self)
+        for i in reversed(range(n)):
+            j = random.randint(0, n - i - 1)
+            self[j], self[i] = self[i], self[j]
 
     def find(self, to_find: Any) -> Any | None:
         for obj in self:
