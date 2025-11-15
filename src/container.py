@@ -10,13 +10,13 @@ class ContainerInterface:
 
     # IMPLEMENT THESE IN YOUR CONTAINER #
     def __iter__(self) -> Iterator[Any]:
-        assert False, "Todo"
+        raise Exception("UNIMPLEMENTED IN YOUR CONTAINER")
 
     def __len__(self) -> int:
-        assert False, "Todo"
+        raise Exception("UNIMPLEMENTED IN YOUR CONTAINER")
 
     def __getitem__(self, idx: int) -> Any:
-        assert False, "Todo"
+        raise Exception("UNIMPLEMENTED IN YOUR CONTAINER")
 
     # Base container algorithms
     def sort(self, compare: Callable[[Any, Any], int] | None = None):
