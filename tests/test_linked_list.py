@@ -3,6 +3,26 @@ import pytest
 from linked_list import LinkedList, LinkedListNode
 
 
+def test_linked_list_slicing():
+    list = LinkedList()
+    for i in range(5):
+        list.push_back(i)
+
+    assert list[1:] == [1, 2, 3, 4]
+    assert list[:-1] == [0, 1, 2, 3]
+    assert list[:-2] == [0, 1, 2]
+    assert list[2:-2] == [2]
+
+
+def test_linked_list_init():
+    list = LinkedList([1, 2, 3, 4, 5])
+    assert list[0] == 1
+    assert list[1] == 2
+    assert list[2] == 3
+    assert list[3] == 4
+    assert list[4] == 5
+
+
 def test_linked_node_str():
     assert str(LinkedListNode(0)) == "0"
     assert str(LinkedListNode("Hello World")) == "Hello World"

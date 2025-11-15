@@ -202,11 +202,30 @@ class LinkedList(ContainerInterface):
             yield node.obj
             node = node.next_node
 
-    def __getitem__(self, idx: int) -> Any | None:
-        n = self.nth_node(idx)
-        if n:
-            return n.obj
-        return None
+    def __getitem__(self, idx: int | slice) -> Any | None:
+        if isinstance(idx, int):
+            n = self.nth_node(idx)
+            if n:
+                return n.obj
+            return None
+        else:
+            # Make an array of the elements inside, they keep references.
+            arr = []
+
+            # Correctly interpret the slice
+            start = 0 if idx.start == None else idx.start
+            stop = len(self) if idx.stop == None else idx.stop
+            if stop < 0:
+                stop += len(self)
+            step = 1 if idx.step == None else idx.step
+
+            for i in range(start, stop, step):
+                arr += [self[i]]
+            return arr
+
+    def __init__(self, from_array: list[Any] = []):
+        for i in from_array:
+            self.push_back(i)
 
     def __setitem__(self, idx: int, value: Any) -> Any:
         n = self.nth_node(idx)
