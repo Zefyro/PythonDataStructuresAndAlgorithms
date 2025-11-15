@@ -25,8 +25,8 @@
 - [x] Binary Tree
 - [x] Binary Search Tree
 - [ ] Balance Tree
-- [ ] HashTable
-- [ ] HashMap
+- [x] HashTable
+- [x] HashMap
 
 ### Finally
 - Provide comprehensive documentation
