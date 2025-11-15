@@ -1,5 +1,6 @@
-from container import ContainerInterface
 from typing import Any
+
+from container import ContainerInterface
 
 
 # Implement doubly linked lists
