@@ -1,6 +1,6 @@
 from typing import Any, Iterator
 
-from .container import ContainerInterface
+from container import ContainerInterface
 
 
 class Queue(ContainerInterface):
