@@ -8,8 +8,8 @@
 - [ ] Merge Sort
 
 #### Search
-- [ ] Linear Search
-- [ ] Binary Search
+- [x] Linear Search
+- [x] Binary Search
 
 #### Traversal
 - [x] In-order traversal

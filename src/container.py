@@ -25,13 +25,12 @@ class ContainerInterface:
     ######################
     # SORTING ALGORITHMS #
     ######################
-
-    # Sort using a custom sorting function.
-    #
-    def sort(self, compare: Callable[[Any, Any], int] | None = None):
-        self.bubble_sort(compare)
-
     def bubble_sort(self, compare: Callable[[Any, Any], int] | None = None):
+        """
+        Sorts a given array, optionally using a user-provided compare function.
+        Uses bubble sorting.
+        Time complexity: O(n^2)
+        """
         if not compare:
             compare = ContainerInterface._default_compare
 
@@ -43,6 +42,12 @@ class ContainerInterface:
                 self[j], self[j + 1] = self[j + 1], self[j]
 
     def bogo_sort(self, compare: Callable[[Any, Any], int] | None = None):
+        """
+        Sorts a given array, optionally using a user-provided compare function.
+        Uses bogo sorting.
+        DO NOT USE, this is a meme sorting algorithm, with horrendous time complexity.
+        Time complexity: O(n x n!)
+        """
         if not compare:
             compare = ContainerInterface._default_compare
 
