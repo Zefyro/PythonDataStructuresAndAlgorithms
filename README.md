@@ -13,3 +13,10 @@ pip install -e . # Install all dependencies (only needed to run tests)
 ```sh
 pytest
 ```
+
+### Coverage
+```sh
+pip install coverage   # Install coverage package
+coverage run -m pytest # Fetch coverage
+coverage report        # Print the coverage in stdout
+```
