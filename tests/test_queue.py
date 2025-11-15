@@ -3,6 +3,16 @@ import pytest
 from src.queue import Queue
 
 
+def test_queue_slicing():
+    queue = Queue()
+    for i in range(5):
+        queue.push(i)
+
+    assert queue[:-1] == [0, 1, 2, 3]
+    assert queue[:-2] == [0, 1, 2]
+    assert queue[2:-2] == [2]
+
+
 def test_queue_set_n_get():
     list = Queue()
     list.push(1)
@@ -60,8 +70,10 @@ def test_getitem():
     assert queue[0] == 1
     assert queue[1] == 2
     assert queue[2] == 3
-    assert queue[-1] == None
-    assert queue[3] == None
+    with pytest.raises(IndexError):
+        queue[-1] = None
+    with pytest.raises(IndexError):
+        queue[3] = None
 
 
 def test_iter():

@@ -1,5 +1,17 @@
 import pytest
+
 from src.stack import Stack
+
+
+def test_stack_slicing():
+    stack = Stack()
+    for i in range(5):
+        stack.push(i)
+
+    assert stack[:-1] == [0, 1, 2, 3]
+    assert stack[:-2] == [0, 1, 2]
+    assert stack[2:-2] == [2]
+
 
 def test_push_pop_size():
     stack: Stack = Stack()
@@ -23,6 +35,7 @@ def test_peek_is_empty():
     assert stack.peek() == "test"
     assert stack.size() == 1
 
+
 def test_setitem():
     stack: Stack = Stack()
     stack.push(1)
@@ -31,15 +44,18 @@ def test_setitem():
     stack[0] = 0
     stack[1] = 0
     stack[2] = 0
-    
+
     with pytest.raises(IndexError):
         stack[3] = 0
-    
+
     assert stack[0] == 0
     assert stack[1] == 0
     assert stack[2] == 0
-    assert stack[-1] == None
-    assert stack[3] == None
+    with pytest.raises(IndexError):
+        stack[-1] = None
+    with pytest.raises(IndexError):
+        stack[3] = None
+
 
 def test_getitem():
     stack: Stack = Stack()
@@ -50,8 +66,11 @@ def test_getitem():
     assert stack[0] == 1
     assert stack[1] == 2
     assert stack[2] == 3
-    assert stack[-1] == None
-    assert stack[3] == None
+    with pytest.raises(IndexError):
+        stack[-1] = None
+    with pytest.raises(IndexError):
+        stack[3] = None
+
 
 def test_iter():
     stack: Stack = Stack()
@@ -61,6 +80,7 @@ def test_iter():
 
     for i, item in enumerate(stack):
         assert item == items[i]
+
 
 def test_datatypes():
     stack: Stack = Stack()
@@ -76,11 +96,13 @@ def test_datatypes():
     assert stack.pop() == 2.5
     assert stack.pop() == 1
 
+
 def test_pop_on_empty_stack():
     stack: Stack = Stack()
     assert stack.pop() is None
     assert stack.pop() is None
     assert stack.pop() is None
+
 
 def test_peek_on_empty_stack():
     stack: Stack = Stack()
@@ -88,15 +110,16 @@ def test_peek_on_empty_stack():
     assert stack.peek() is None
     assert stack.peek() is None
 
+
 def test_large_stack():
     stack: Stack = Stack()
     for i in range(1000):
         stack.push(i)
-    
+
     assert stack.size() == 1000
 
     for i in range(999, -1, -1):
         assert stack.pop() == i
-    
+
     assert stack.size() == 0
     assert stack.is_empty()
