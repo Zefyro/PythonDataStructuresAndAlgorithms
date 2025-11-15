@@ -25,11 +25,29 @@ class ContainerInterface:
     ######################
     # SORTING ALGORITHMS #
     ######################
+    def insertion_sort(self, compare: Callable[[Any, Any], int] | None = None):
+        """
+        Sorts a given array, optionally using a user-provided compare function.
+        Uses insertion sort for sorting.
+        Average time complexity: O(n^2)
+        """
+        n = len(self)
+        for i in range(1, n):
+            insert_index = i
+            current_value = self[i]
+            for j in reversed(range(i)):
+                if self[j] > current_value:
+                    self[j + 1] = self[j]
+                    insert_index = j
+                else:
+                    break
+            self[insert_index] = current_value
+
     def bubble_sort(self, compare: Callable[[Any, Any], int] | None = None):
         """
         Sorts a given array, optionally using a user-provided compare function.
         Uses bubble sorting.
-        Time complexity: O(n^2)
+        Average time complexity: O(n^2)
         """
         if not compare:
             compare = ContainerInterface._default_compare
@@ -46,7 +64,7 @@ class ContainerInterface:
         Sorts a given array, optionally using a user-provided compare function.
         Uses bogo sorting.
         DO NOT USE, this is a meme sorting algorithm, with horrendous time complexity.
-        Time complexity: O(n x n!)
+        Average time complexity: O(n x n!)
         """
         if not compare:
             compare = ContainerInterface._default_compare

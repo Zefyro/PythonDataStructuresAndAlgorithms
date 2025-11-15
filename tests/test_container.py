@@ -133,6 +133,28 @@ def test_container_bubble_sort():
     assert stack.is_sorted()
 
 
+def test_container_insertion_sort():
+    r = range(0, 100)
+
+    list = LinkedList()
+    for _ in r:
+        list.push_back(random.random())
+    list.insertion_sort()
+    assert list.is_sorted()
+
+    deque = Deque()
+    for _ in r:
+        deque.push_back(random.random())
+    deque.insertion_sort()
+    assert deque.is_sorted()
+
+    stack = Stack()
+    for _ in r:
+        stack.push(random.random())
+    stack.insertion_sort()
+    assert stack.is_sorted()
+
+
 def test_container_bogo_sort():
     r = range(0, 4)
 
