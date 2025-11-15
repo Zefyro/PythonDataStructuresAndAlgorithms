@@ -21,6 +21,12 @@ class Deque(ContainerInterface):
         else:
             return self.items[idx]
 
+    def __setitem__(self, idx: int, value: Any) -> Any:
+        if idx >= self.size() or idx < 0:
+            raise IndexError(f"Out of index {idx}")
+        self.items[idx] = value
+        return self.items[idx]
+
     def __len__(self) -> int:
         return self.size()
 

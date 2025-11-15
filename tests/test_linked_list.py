@@ -1,6 +1,24 @@
 from linked_list import LinkedList, LinkedListNode
 
 
+def test_linked_list_set_n_get():
+    list = LinkedList()
+    list.push_back(1)
+    list.push_back(2)
+    list.push_back(3)
+
+    assert list[0] == 1
+    assert list[1] == 2
+    assert list[2] == 3
+
+    list[0] = "Hello"
+    list[1] = "Sailor"
+    list[2] = "!"
+    assert list[0] == "Hello"
+    assert list[1] == "Sailor"
+    assert list[2] == "!"
+
+
 def test_linked_list_node_patching():
     n1 = LinkedListNode(20)
     assert n1.next_node == None

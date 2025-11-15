@@ -202,6 +202,13 @@ class LinkedList(ContainerInterface):
             return n.obj
         return None
 
+    def __setitem__(self, idx: int, value: Any) -> Any:
+        n = self.nth_node(idx)
+        if not n:
+            raise IndexError(f"Out of index {idx}!")
+        n.obj = value
+        return n.obj
+
     def __len__(self) -> int:
         node = self.node
         num: int = 1 if self.node else 0
