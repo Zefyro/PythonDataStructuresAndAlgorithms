@@ -3,6 +3,17 @@ import pytest
 from src.queue import Queue
 
 
+def test_queue_initialization():
+    queue = Queue([])
+    assert len(queue) == 0
+
+    queue = Queue([1, 2, 3])
+    assert len(queue) == 3
+    assert queue[0] == 1
+    assert queue[1] == 2
+    assert queue[2] == 3
+
+
 def test_queue_slicing():
     queue = Queue()
     for i in range(5):

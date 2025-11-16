@@ -3,6 +3,17 @@ import pytest
 from src.deque import Deque
 
 
+def test_deque_initialization():
+    deque = Deque([])
+    assert len(deque) == 0
+
+    deque = Deque([1, 2, 3])
+    assert len(deque) == 3
+    assert deque[0] == 1
+    assert deque[1] == 2
+    assert deque[2] == 3
+
+
 def test_array_slicing():
     deq = Deque()
     for i in range(5):

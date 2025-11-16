@@ -9,8 +9,8 @@ class Stack(ContainerInterface):
     - A stack follows a "last-in, first-out" (LIFO) principle.
     """
 
-    def __init__(self) -> None:
-        self.items: list[Any] = []
+    def __init__(self, from_array: list[Any] | None = None) -> None:
+        self.items: list[Any] = [] if not from_array else from_array
 
     def __iter__(self) -> Iterator[Any]:
         return iter(self.items)

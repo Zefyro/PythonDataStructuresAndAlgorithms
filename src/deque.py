@@ -9,8 +9,8 @@ class Deque(ContainerInterface):
     - A deque allows adding and removing elements from both the front and back.
     """
 
-    def __init__(self) -> None:
-        self.items: list[Any] = []
+    def __init__(self, from_array: list[Any] | None = None) -> None:
+        self.items: list[Any] = [] if not from_array else from_array
 
     def __iter__(self) -> Iterator[Any]:
         return iter(self.items)

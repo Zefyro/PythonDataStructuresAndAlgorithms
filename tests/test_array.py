@@ -19,8 +19,20 @@ def test_initialization():
     assert len(array) == 5
     for i in range(5):
         assert array[i] is None
-
     assert type(array) == Array
+
+    array = Array(2, [1, 2, 3])
+    assert len(array) == 2
+    assert array[0] == 1
+    assert array[1] == 2
+
+    array = Array(5, [1, 2, 3])
+    assert len(array) == 5
+    assert array[0] == 1
+    assert array[1] == 2
+    assert array[2] == 3
+    assert array[3] == None
+    assert array[4] == None
 
 
 def test_getitem_setitem():

@@ -13,6 +13,17 @@ def test_stack_slicing():
     assert stack[2:-2] == [2]
 
 
+def test_stack_initialization():
+    stack = Stack([])
+    assert len(stack) == 0
+
+    stack = Stack([1, 2, 3])
+    assert len(stack) == 3
+    assert stack[0] == 1
+    assert stack[1] == 2
+    assert stack[2] == 3
+
+
 def test_push_pop_size():
     stack: Stack = Stack()
     assert stack.size() == 0
