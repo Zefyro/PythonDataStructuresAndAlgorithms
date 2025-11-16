@@ -9,10 +9,13 @@ class Array(ContainerInterface):
     - An array represents a collection of elements, with a predefined size.
     """
 
-    def __init__(self, size: int) -> None:
-        self.items: list[Any] = []
-        for _ in range(0, size):
-            self.items.append(None)
+    def __init__(self, size: int, from_array: list[Any] | None = None) -> None:
+        self.items: list[Any] = [] if not from_array else from_array
+        if len(self.items) < size:
+            for _ in range(len(self.items), size):
+                self.items.append(None)
+        elif len(self.items) > size:
+            self.items = self.items[:size]
 
     def __iter__(self) -> Iterator[Any]:
         return iter(self.items)
