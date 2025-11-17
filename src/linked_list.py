@@ -224,6 +224,7 @@ class LinkedList(ContainerInterface):
             return arr
 
     def __init__(self, from_array: list[Any] = []):
+        self.clear()
         for i in from_array:
             self.push_back(i)
 
@@ -241,3 +242,8 @@ class LinkedList(ContainerInterface):
             node = node.next_node
             num += 1
         return num
+
+    def clear(self):
+        while self.node:
+            self.pop_front()
+

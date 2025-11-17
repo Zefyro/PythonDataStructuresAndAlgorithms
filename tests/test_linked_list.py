@@ -12,6 +12,7 @@ def test_linked_list_slicing():
     assert list[:-1] == [0, 1, 2, 3]
     assert list[:-2] == [0, 1, 2]
     assert list[2:-2] == [2]
+    assert list[:] == [0, 1, 2, 3, 4]
 
 
 def test_linked_list_init():
