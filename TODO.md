@@ -4,8 +4,8 @@
 #### Sorting
 - [x] Bogo sort
 - [x] Bubble Sort
-- [X] Insertion Sort
-- [ ] Merge Sort
+- [x] Insertion Sort
+- [x] Merge Sort
 
 #### Search
 - [x] Linear Search

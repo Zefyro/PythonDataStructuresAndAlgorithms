@@ -3,10 +3,12 @@ from typing import Any
 
 import pytest
 
+from src import deque
 from src._array import Array
 from src.container import ContainerInterface
 from src.deque import Deque
 from src.linked_list import LinkedList
+from src.queue import Queue
 from src.stack import Stack
 
 
@@ -44,6 +46,8 @@ def test_container_unimplemented():
             print(i)
     with pytest.raises(Exception):
         n = len(interface)
+    with pytest.raises(Exception):
+        n = interface.merge_sort()
 
 
 def test_container_find_default():
@@ -109,6 +113,40 @@ def test_container_iteration_n_is_sorted():
     for i in r:
         stack.push(i)
     container_iterate(stack)
+
+
+def test_container_merge_sort():
+    r = range(0, 100)
+
+    list = Array(100)
+    for i in r:
+        list[i] = random.random()
+    list.merge_sort()
+    assert list.is_sorted()
+
+    deque = Deque()
+    for i in r:
+        deque.push_back(random.random())
+    deque.merge_sort()
+    assert deque.is_sorted()
+
+    queue = Queue()
+    for i in r:
+        queue.push(random.random())
+    queue.merge_sort()
+    assert queue.is_sorted()
+
+    stack = Stack()
+    for i in r:
+        stack.push(random.random())
+    stack.merge_sort()
+    assert stack.is_sorted()
+
+    list = LinkedList()
+    for i in r:
+        list.push_back(random.random())
+    list.merge_sort()
+    assert list.is_sorted()
 
 
 def test_container_bubble_sort():

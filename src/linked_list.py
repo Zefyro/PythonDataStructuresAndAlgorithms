@@ -1,6 +1,6 @@
-from typing import Any
+from typing import Any, Callable
 
-from container import ContainerInterface
+from container import ContainerInterface, _merge_sort_impl
 
 
 # Implement doubly linked lists
@@ -208,20 +208,20 @@ class LinkedList(ContainerInterface):
             if n:
                 return n.obj
             return None
-        else:
-            # Make an array of the elements inside, they keep references.
-            arr = []
 
-            # Correctly interpret the slice
-            start = 0 if idx.start == None else idx.start
-            stop = len(self) if idx.stop == None else idx.stop
-            if stop < 0:
-                stop += len(self)
-            step = 1 if idx.step == None else idx.step
+        # Make an array of the elements inside, they keep references.
+        arr = []
 
-            for i in range(start, stop, step):
-                arr += [self[i]]
-            return arr
+        # Correctly interpret the slice
+        start = 0 if idx.start == None else idx.start
+        stop = len(self) if idx.stop == None else idx.stop
+        if stop < 0:
+            stop += len(self)
+        step = 1 if idx.step == None else idx.step
+
+        for i in range(start, stop, step):
+            arr += [self[i]]
+        return arr
 
     def __init__(self, from_array: list[Any] = []):
         self.clear()
@@ -247,3 +247,17 @@ class LinkedList(ContainerInterface):
         while self.node:
             self.pop_front()
 
+    def merge_sort(self, compare: Callable[[Any, Any], int] | None = None) -> None:
+        """
+        Sorts a given container, optionally using a user-provided compare function.
+        Uses bubble sorting.
+        Average time complexity: O(n log n)
+        """
+        array = self[:]
+        if not array:
+            return
+        print(f"BEFORE {array}")
+        compare = ContainerInterface._default_compare if not compare else compare
+        _merge_sort_impl(array, compare)
+        print(f"SORTED {array}")
+        self.__init__(array)

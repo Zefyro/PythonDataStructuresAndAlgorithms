@@ -1,6 +1,6 @@
-from typing import Any, Iterator
+from typing import Any, Callable, Iterator
 
-from container import ContainerInterface
+from container import ContainerInterface, _merge_sort_impl
 
 
 class Stack(ContainerInterface):
@@ -69,3 +69,12 @@ class Stack(ContainerInterface):
         Returns: The size of the stack.
         """
         return len(self.items)
+
+    def merge_sort(self, compare: Callable[[Any, Any], int] | None = None) -> None:
+        """
+        Sorts a given container, optionally using a user-provided compare function.
+        Uses bubble sorting.
+        Average time complexity: O(n log n)
+        """
+        compare = ContainerInterface._default_compare if not compare else compare
+        _merge_sort_impl(self.items, compare)
