@@ -167,3 +167,39 @@ def test_search_node_less_than_node_value():
     assert result_node is not None
     assert result_node.value == 30
 
+def test_delete_left_right_case():
+    """Test for left-right rotation after deletion."""
+    tree = BalanceTree()
+    tree.insert(30)
+    tree.insert(10)
+    tree.insert(40)
+    tree.insert(20)
+    tree.delete(40)
+    assert tree.root.value == 20
+    assert tree.inorder_traversal() == [10, 20, 30]
+    assert tree.preorder_traversal() == [20, 10, 30]
+
+def test_delete_left_rotation():
+    """Test for left rotation after deletion."""
+    tree = BalanceTree()
+    tree.insert(20)
+    tree.insert(10)
+    tree.insert(40)
+    tree.insert(30)
+    tree.insert(50)
+    tree.delete(10)
+    assert tree.root.value == 40
+    assert tree.inorder_traversal() == [20, 30, 40, 50]
+    assert tree.preorder_traversal() == [40, 20, 30, 50]
+
+def test_delete_right_left_rotation():
+    """Test for right-left rotation after deletion."""
+    tree = BalanceTree()
+    tree.insert(20)
+    tree.insert(10)
+    tree.insert(40)
+    tree.insert(30)
+    tree.delete(10)
+    assert tree.root.value == 30
+    assert tree.inorder_traversal() == [20, 30, 40]
+    assert tree.preorder_traversal() == [30, 20, 40]

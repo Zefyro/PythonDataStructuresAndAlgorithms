@@ -1,5 +1,5 @@
 import pytest
-from src.binary_search_tree import BinarySearchTree
+from src.binary_search_tree import BinarySearchTree, Node
 
 
 def test_insert_and_find():
@@ -123,3 +123,73 @@ def test_delete_all_occurrences():
     assert tree.inorder_traversal() == [5, 15]
     assert tree.find(10) is False
     tree.delete(None)
+
+@pytest.fixture
+def tree_for_delete_one():
+    t = BinarySearchTree()
+    t.insert(10)
+    t.insert(5)
+    t.insert(15)
+    t.insert(3)
+    t.insert(7)
+    t.insert(12)
+    t.insert(17)
+    return t
+
+def test_delete_one_node_with_no_left_child():
+    t = BinarySearchTree()
+    t.insert(10)
+    t.insert(5)
+    t.insert(15)
+    t.insert(17)
+    
+    t.root = t._delete_one_recursive(t.root, 15)
+    
+    assert t.inorder_traversal() == [5, 10, 17]
+    assert t.find(15) is False
+
+def test_delete_one_node_with_no_right_child():
+    t = BinarySearchTree()
+    t.insert(10)
+    t.insert(5)
+    t.insert(15)
+    t.insert(3)
+
+    t.root = t._delete_one_recursive(t.root, 5)
+    
+    assert t.inorder_traversal() == [3, 10, 15]
+    assert t.find(5) is False
+
+def test_delete_one_node_with_two_children(tree_for_delete_one):
+    tree = tree_for_delete_one
+    tree.root = tree._delete_one_recursive(tree.root, 10)
+    
+    assert tree.root.value == 12
+    assert tree.inorder_traversal() == [3, 5, 7, 12, 15, 17]
+    assert tree.find(10) is False
+
+def test_delete_one_value_in_left_subtree(tree_for_delete_one):
+    tree = tree_for_delete_one
+    tree.root = tree._delete_one_recursive(tree.root, 3)
+    
+    assert tree.inorder_traversal() == [5, 7, 10, 12, 15, 17]
+    assert tree.find(3) is False
+
+def test_delete_one_value_in_right_subtree(tree_for_delete_one):
+    tree = tree_for_delete_one
+    tree.root = tree._delete_one_recursive(tree.root, 17)
+    
+    assert tree.inorder_traversal() == [3, 5, 7, 10, 12, 15]
+    assert tree.find(17) is False
+
+def test_delete_leaf_node_one_recursive(tree_for_delete_one):
+    tree = tree_for_delete_one
+    tree.root = tree._delete_one_recursive(tree.root, 3)
+    assert tree.inorder_traversal() == [5, 7, 10, 12, 15, 17]
+    assert tree.find(3) is False
+
+def test_delete_nonexistent_node_one_recursive(tree_for_delete_one):
+    tree = tree_for_delete_one
+    initial_traversal = tree.inorder_traversal()
+    with pytest.raises(AttributeError):
+        tree.root = tree._delete_one_recursive(tree.root, 99)
