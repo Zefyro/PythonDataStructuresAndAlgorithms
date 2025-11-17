@@ -24,7 +24,7 @@
 - [x] Stack
 - [x] Binary Tree
 - [x] Binary Search Tree
-- [ ] Balance Tree
+- [x] Balance Tree
 - [x] HashTable
 - [x] HashMap
 
