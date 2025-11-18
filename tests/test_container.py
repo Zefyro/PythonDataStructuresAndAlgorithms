@@ -148,6 +148,39 @@ def test_container_merge_sort():
     list.merge_sort()
     assert list.is_sorted()
 
+def test_container_merge_sort():
+    r = range(0, 100)
+
+    list = Array(100)
+    for i in r:
+        list[i] = random.random()
+    list.insertion_sort()
+    assert list.is_sorted()
+
+    deque = Deque()
+    for i in r:
+        deque.push_back(random.random())
+    deque.insertion_sort()
+    assert deque.is_sorted()
+
+    queue = Queue()
+    for i in r:
+        queue.push(random.random())
+    queue.insertion_sort()
+    assert queue.is_sorted()
+
+    stack = Stack()
+    for i in r:
+        stack.push(random.random())
+    stack.insertion_sort()
+    assert stack.is_sorted()
+
+    list = LinkedList()
+    for i in r:
+        list.push_back(random.random())
+    list.insertion_sort()
+    assert list.is_sorted()
+
 
 def test_container_bubble_sort():
     r = range(0, 100)
