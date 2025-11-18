@@ -34,7 +34,7 @@ class ContainerInterface:
     def insertion_sort(self, compare: Callable[[Any, Any], int] | None = None):
         """
         Sorts a given array, optionally using a user-provided compare function.
-        Uses insertion sort for sorting.
+        Uses insertion sorting.
         Average time complexity: O(n^2)
         """
         n = len(self)
@@ -78,23 +78,6 @@ class ContainerInterface:
         # Not sorted? Shuffle:
         while not self.is_sorted(compare):
             self.shuffle()
-
-    def insertion_sort(self,  compare: Callable[[Any, Any], int] | None = None):
-        if not compare:
-            compare = ContainerInterface._default_compare
-
-        n = len(self)
-        
-        if n <= 1:
-            return
-        for i in range(1, n):
-            key = self[i]         
-            j = i - 1
-            while j >= 0 and key < self[j]: 
-                self[j + 1] = self[j]
-                j -= 1
-            self[j + 1] = key      
-
 
     def shuffle(self):
         """
